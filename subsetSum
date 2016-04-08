@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>HackReactor - Subset sum problem</title>
+	</header>
+	<body>
+		<h1></h1>
+		<p></p>
+	</body>
+	<script>
+		// generating power sets, O(2^n)
+		function subsetSum(arr,sum) {
+			var sets = [[]];
+			var findSum = false;
+			for (var i = 0; i < arr.length; i++) {
+				// for (j = 0; j < sets.length; j++) { using this line instead the line below keep crashing the browser...???
+				for (var j = 0, len = sets.length; j < len; j++) {
+					var temp = sets[j].concat(arr[i]);
+					sets.push(temp);
+					var setSum = temp.reduce(function(prev,cur) {
+						return prev + cur;
+					},0);
+					if (setSum == sum) {
+						findSum = true;
+					}
+				}
+			}
+			return findSum;
+		}
+		console.log(subsetSum([1, 2, 6],9))
+
+
+
+		// optimize solution - dynamic programming
+		/*
+		[2,3,7,1]
+		sum = 6
+		table[i][j] = table[i-1][j] || table[i-1][sum-currentElement]
+
+		  0 1 2 3 4 5 6 
+		0 T F F F F F F
+		2 T F T F F F F 
+		3 T F T T F T F
+		7 T F T T F T F
+		1 T T T T T T T
+		*/
+
+	</script>
+</html>
