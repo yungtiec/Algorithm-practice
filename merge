@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>HackReactor - Closure</title>
+	</header>
+	<body>
+		<h1></h1>
+		<p>http://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/</p>
+	</body>
+	<script>
+
+	var merge = function(array1, array2, callback){  
+	  // your code here.
+	  // check if arr length match 
+	  if (array1.length !== array2.length) {
+	  	return null;
+	  }
+	  var newArray = [];
+	  for (var i = 0; i < array1.length; i++) {
+	  	a = array1[i];
+	  	b = array2[i];
+	  	newArray.push(callback(a,b));
+	  }
+	  return newArray;
+	}
+	var x = merge([1, 2, 3, 4], [5, 6, 7, 8], function(a, b){  
+	  return a + b;
+	});
+	console.log(x);
+	//x should now equal [6, 8, 10, 12].
+
+	var euclid = function(coords1, coords2){  
+	  // Your code here.
+	  // You should not use any loops and should
+	  // instead use your original merge function.
+	  var subtract = function(a,b) {
+	  	return a - b;
+	  }
+	  var product = function(a,b) {
+	  	return a * b;
+	  }
+	  var difference = merge(coords1,coords2,subtract);
+	  var square = merge(difference, difference, product);
+	  var sum = square.reduce(function(prev, cur){
+	  	return prev + cur;
+	  })
+	  return Math.sqrt(sum);
+	}
+	var x = euclid([1.2, 3.67], [2.0, 4.4]);
+	console.log(x);
+	//x should now equal approximately 1.08.
+
+	</script>
+</html>
