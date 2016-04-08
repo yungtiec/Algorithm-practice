@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>HackReactor - Stock maximum profit</title>
+	</header>
+	<body>
+		<h1></h1>
+		<p></p>
+	</body>
+	<script>
+		/*
+			You will be given a list of stock prices for a given day and your goal is to return the maximum profit that could have been made by buying a stock at the given price and then selling the stock later on. For example if the input is: [45, 24, 35, 31, 40, 38, 11] then your program should return 16 because if you bought the stock at $24 and sold it at $40, a profit of $16 was made and this is the largest profit that could be made. If no profit could have been made, return -1.
+		*/
+		var stockPrices = [44, 30, 24, 32, 35, 30, 40, 38, 15, 25];
+		/*
+			brute force approach: going through n C 2 pairs of buying&selling prices
+		*/
+		function stockPicker(arr) {
+			var profit = -1;
+			var buyingPrice = 0;
+			var sellingPrice = 0;
+			for (var i = 0; i < stockPrices.length - 1; i++) {
+
+				var sellingPrices = stockPrices.slice(i+1,stockPrices.length+1);
+				var curPrice = stockPrices[i];
+				var profits = sellingPrices.map(function(val){
+					return val - curPrice;
+				})
+				curProfit = Math.max.apply(null,profits);
+				if (curProfit > profit) {
+					profit = curProfit;
+					buyingPrice = stockPrices[i];
+					sellingPrice = stockPrices[profits.indexOf(curProfit) + i + 1];
+
+				}
+
+			}
+			console.log("buy at " + buyingPrice + ", sell at " + sellingPrice + ", profit " + profit);
+			//can apply an absolute function to profits before finding the maximim => can also short stock 
+			
+		}
+
