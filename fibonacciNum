@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Fibonacci numbers</title>
+	</header>
+	<body>
+		<h1></h1>
+		<p></p>
+	</body>
+	<script>
+		// cracking the coding interview p.132
+		// recusive solution 
+		function fibonacci(i) {
+			if (i < 2) return i;
+			return fibonacci(i - 1) + fibonacci(i - 2);
+		}
+		console.log(fibonacci(7))
+
+		// iteration and array approach to save memory
+		// dynamic programming bottom up approach
+		function dynamicFib(n) {
+			var val = [];
+			for (var i = 0; i <= n; i++) {
+				val[i] = 0; // fill the array with zero
+			}
+			if (n == 1 || n == 2) {
+				return 1;
+			} else {
+				val[1] = 1;
+				val[2] = 1;
+				for (var i = 3; i <= n; i++) {
+					val[i] = val[i-1] + val[i-2];
+				}
+				return val[n];
+			}
+		}
+		console.log(dynamicFib(7))
+
+	</script>
+</html>
